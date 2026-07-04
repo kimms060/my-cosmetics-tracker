@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Cosmetics - 내 화장품 정리</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <h1>
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="6" y="4" width="12" height="4" rx="2" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="5" y="8.5" width="14" height="11.5" rx="3" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M8.5 12.5c0 1.5 1.2 2 3.5 2s3.5-.5 3.5-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      My Cosmetics
+    </h1>
+    <p class="subtitle">내가 갖고 있는 화장품을 종류별로 정리했어요</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <input type="text" id="searchInput" placeholder="제품명 또는 브랜드 검색">
+
+      <div class="category-tabs" id="categoryTabs">
+        <button class="tab-btn active" data-category="all">전체</button>
+        <button class="tab-btn" data-category="skincare">스킨케어</button>
+        <button class="tab-btn" data-category="makeup">메이크업</button>
+        <button class="tab-btn" data-category="cleansing">클렌징</button>
+        <button class="tab-btn" data-category="hairbody">헤어/바디</button>
+      </div>
+    </section>
+
+    <section class="summary" id="summary">
+      <!-- 종류별 개수 요약 (JS로 채워짐) -->
+    </section>
+
+    <section class="product-grid" id="productGrid">
+      <!-- 화장품 카드 목록 (JS로 채워짐) -->
+    </section>
+
+    <p class="empty-message" id="emptyMessage" hidden>조건에 맞는 화장품이 없어요.</p>
+  </main>
+
+  <!-- 상세 보기 모달 -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>※ 예시 데이터로 구성된 뼈대 페이지입니다.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
