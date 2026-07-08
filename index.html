@@ -10,32 +10,50 @@
 
   <header class="site-header">
     <h1>
-      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="6" y="4" width="12" height="4" rx="2" stroke="currentColor" stroke-width="1.4"/>
-        <rect x="5" y="8.5" width="14" height="11.5" rx="3" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M8.5 12.5c0 1.5 1.2 2 3.5 2s3.5-.5 3.5-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="woodBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ecc79c"/>
+            <stop offset="100%" stop-color="#b98d5e"/>
+          </linearGradient>
+          <linearGradient id="woodDrawer" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e2b688"/>
+            <stop offset="100%" stop-color="#ab7c4d"/>
+          </linearGradient>
+          <linearGradient id="handleGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f9ecc7"/>
+            <stop offset="100%" stop-color="#d4b571"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="4" width="16" height="16" rx="1.8" fill="url(#woodBody)" stroke="#8a6a45" stroke-width="0.6"/>
+        <rect x="5" y="5" width="14" height="6" rx="1" fill="url(#woodDrawer)" stroke="#8a6a45" stroke-width="0.4"/>
+        <rect x="5" y="12.5" width="14" height="6" rx="1" fill="url(#woodDrawer)" stroke="#8a6a45" stroke-width="0.4"/>
+        <rect x="10" y="7.3" width="4" height="1.4" rx="0.7" fill="url(#handleGrad)"/>
+        <rect x="10" y="14.8" width="4" height="1.4" rx="0.7" fill="url(#handleGrad)"/>
       </svg>
       My Cosmetics
     </h1>
-    <p class="subtitle">내가 갖고 있는 화장품을 종류별로 정리했어요</p>
   </header>
 
   <main>
     <section class="controls">
-      <input type="text" id="searchInput" placeholder="제품명 또는 브랜드 검색">
+      <div class="controls-top">
+        <input type="text" id="searchInput" placeholder="제품명 또는 브랜드 검색">
+        <button type="button" class="add-btn" id="addProductBtn">+ 제품 추가</button>
+      </div>
 
       <div class="category-tabs" id="categoryTabs">
-        <button class="tab-btn active" data-category="all">전체</button>
-        <button class="tab-btn" data-category="skincare">스킨케어</button>
-        <button class="tab-btn" data-category="makeup">메이크업</button>
-        <button class="tab-btn" data-category="cleansing">클렌징</button>
-        <button class="tab-btn" data-category="hairbody">헤어/바디</button>
+        <!-- 탭은 CATEGORIES 데이터를 기반으로 script.js에서 자동 생성됩니다 -->
       </div>
     </section>
 
-    <section class="summary" id="summary">
-      <!-- 종류별 개수 요약 (JS로 채워짐) -->
-    </section>
+    <div class="grid-toolbar">
+      <select id="sortSelect" class="sort-select-small">
+        <option value="latest">최신순</option>
+        <option value="name">가나다순</option>
+        <option value="expiry">사용기한순</option>
+      </select>
+    </div>
 
     <section class="product-grid" id="productGrid">
       <!-- 화장품 카드 목록 (JS로 채워짐) -->
@@ -49,11 +67,47 @@
     <div class="modal">
       <button class="modal-close" id="modalClose">&times;</button>
       <div id="modalContent"></div>
+      <button type="button" class="edit-btn" id="modalEditBtn">수정하기</button>
+    </div>
+  </div>
+
+  <!-- 제품 추가/수정 모달 -->
+  <div class="modal-overlay" id="addModalOverlay" hidden>
+    <div class="modal">
+      <button class="modal-close" id="addModalClose">&times;</button>
+      <h2 class="form-title" id="addFormTitle">제품 추가</h2>
+      <form id="addProductForm">
+        <div class="form-row">
+          <label for="fieldCategory">제품군</label>
+          <select id="fieldCategory" required></select>
+        </div>
+        <div class="form-row">
+          <label for="fieldBrand">브랜드명</label>
+          <input type="text" id="fieldBrand" required>
+        </div>
+        <div class="form-row">
+          <label for="fieldName">제품명</label>
+          <input type="text" id="fieldName" required>
+        </div>
+        <div class="form-row">
+          <label for="fieldShade">호수/색상 (선택)</label>
+          <input type="text" id="fieldShade">
+        </div>
+        <div class="form-row">
+          <label for="fieldOpenDate">개봉일 (선택)</label>
+          <input type="date" id="fieldOpenDate">
+        </div>
+        <div class="form-row">
+          <label for="fieldExpiry">사용기한 (선택)</label>
+          <input type="date" id="fieldExpiry">
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">추가하기</button>
+      </form>
     </div>
   </div>
 
   <footer class="site-footer">
-    <p>※ 예시 데이터로 구성된 뼈대 페이지입니다.</p>
+    <p>총 <strong id="footerCount">0</strong>개의 화장품을 관리하고 있어요.</p>
   </footer>
 
   <script src="script.js"></script>
