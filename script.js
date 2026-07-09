@@ -180,7 +180,7 @@ function editProduct(id, data) {
 // ---- 상태 ----
 let currentCategory = "all";
 let currentSearch = "";
-let currentSort = "latest";
+let currentSort = "name";
 let currentModalProduct = null;
 let editingId = null;
 
@@ -301,8 +301,11 @@ function renderProducts() {
     const meta = CATEGORIES[product.category];
     const status = getExpiryStatus(product);
     const card = document.createElement("article");
-    card.className = "product-card";
-    card.addEventListener("click", () => openModal(product));
+    card.className = "product-card" + (product.finished ? " done" : "");
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".card-action-btn")) return;
+      openModal(product);
+    });
 
     card.innerHTML = `
       <span class="category-badge">${meta.icon} ${meta.label}</span>
@@ -315,9 +318,24 @@ function renderProducts() {
           ${status ? `<span class="status-badge status-${status.tone}">${status.text}</span>` : ""}
         </div>
       </div>
+      <div class="card-actions">
+        <button type="button" class="card-action-btn${product.finished === "used" ? " active" : ""}" data-action="used">사용 완료</button>
+        <button type="button" class="card-action-btn${product.finished === "discarded" ? " active" : ""}" data-action="discard">버리기</button>
+      </div>
     `;
+
+    card.querySelector('[data-action="used"]').addEventListener("click", () => toggleFinished(product.id, "used"));
+    card.querySelector('[data-action="discard"]').addEventListener("click", () => toggleFinished(product.id, "discarded"));
+
     productGrid.appendChild(card);
   });
+}
+
+function toggleFinished(id, status) {
+  const product = products.find((p) => p.id === id);
+  if (!product) return;
+  const next = product.finished === status ? null : status;
+  editProduct(id, { finished: next });
 }
 
 function openModal(product) {
