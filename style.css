@@ -196,13 +196,17 @@ main {
   border-color: #cfcccd;
 }
 
-.product-card.done .product-name {
+.product-card.done .name-text {
   text-decoration: line-through;
   color: #8d8a8b;
 }
 
-.product-card.done .product-brand,
+.product-card.done .product-brand {
+  color: #a19d9e;
+}
+
 .product-card.done .product-shade {
+  text-decoration: line-through;
   color: #a19d9e;
 }
 

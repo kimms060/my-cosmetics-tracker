@@ -312,7 +312,7 @@ function renderProducts() {
       <div class="product-info">
         <div class="product-main">
           <p class="product-brand">${product.brand}</p>
-          <p class="product-name">${product.name}${product.shade ? ` <span class="product-shade">${product.shade}</span>` : ""}</p>
+          <p class="product-name"><span class="name-text">${product.name}</span>${product.shade ? ` <span class="product-shade">${product.shade}</span>` : ""}</p>
         </div>
         <div class="product-tags">
           ${status ? `<span class="status-badge status-${status.tone}">${status.text}</span>` : ""}
